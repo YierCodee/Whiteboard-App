@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# drizzle-kit output
+/drizzle
+
+# AI agent files
+AGENTS.md
+CLAUDE.md
