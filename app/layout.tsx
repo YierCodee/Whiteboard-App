@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Inter } from 'next/font/google'
 import './globals.css'
 import Provider from './provider'
+import { cn } from "@/lib/utils";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}> 
+      <html lang="en" suppressHydrationWarning className={cn(geistSans.variable, geistMono.variable, "font-sans", inter.variable)}> 
         <body style = {{margin:0, padding: 0}} >
           <Provider>
                 {children}
