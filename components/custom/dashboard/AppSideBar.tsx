@@ -1,6 +1,6 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
+"use client";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
   Sidebar,
   SidebarContent,
@@ -9,69 +9,97 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenuButton,
-} from "@/components/ui/sidebar"
-import { UserButton, useUser } from "@clerk/nextjs"
-import { Archive, File, LayoutGrid, Settings, Sparkle, Users } from "lucide-react"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
+} from "@/components/ui/sidebar";
+import { UserButton, useUser } from "@clerk/nextjs";
+import {
+  Archive,
+  File,
+  LayoutGrid,
+  Settings,
+  Sparkle,
+  Users,
+} from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import CreateNewBoardDialog from "./CreateNewBoardDialog";
 
 export function AppSidebar() {
-  
-   const path=usePathname();
-   const {user}=useUser();
+  const path = usePathname();
+  const { user } = useUser();
 
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-2">
-        <Image src="/logo.svg" alt="Logo" width={40} height={40}/>
-        <h2 className="text-xl font-bold">WhiteBoard</h2>
+          <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+          <h2 className="text-xl font-bold">WhiteBoard</h2>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <Button> + Create New Board</Button>
+          <CreateNewBoardDialog />
         </SidebarGroup>
 
-      <SidebarGroup>
-        <SidebarGroupLabel>My Boards</SidebarGroupLabel>
-        <SidebarMenuButton className="p-5" isActive={path === '/dashboard'}>
-          <LayoutGrid/>
-          <span>All Files</span>
-        </SidebarMenuButton>
-           <SidebarMenuButton className="p-5 mt-2" isActive={path === '/shared-files'}>
-          <Users/>
-          <span>Shared</span>
-        </SidebarMenuButton>
-           <SidebarMenuButton className="p-5 mt-2" isActive={path === '/archived'}>
-          <Archive/>
-          <span>Archived</span>
-        </SidebarMenuButton>
-      </SidebarGroup>
-      <SidebarGroup>
-        <SidebarGroupLabel>Other</SidebarGroupLabel>
-         <SidebarMenuButton className="p-5 mt-2" isActive={path === '/archived'}>
-          <Sparkle/>
-          <span>Ai Helper</span>
-        </SidebarMenuButton>
-      <SidebarMenuButton className="p-5 mt-2" isActive={path === '/archived'}>
-          <Settings/>
-          <span>Setting</span>
-        </SidebarMenuButton>
-      </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>My Boards</SidebarGroupLabel>
+          <SidebarMenuButton className="p-5" isActive={path === "/dashboard"}>
+            <LayoutGrid />
+            <span>All Files</span>
+          </SidebarMenuButton>
+          <SidebarMenuButton
+            className="p-5 mt-2"
+            isActive={path === "/shared-files"}
+          >
+            <Users />
+            <span>Shared</span>
+          </SidebarMenuButton>
+          <SidebarMenuButton
+            className="p-5 mt-2"
+            isActive={path === "/archived"}
+          >
+            <Archive />
+            <span>Archived</span>
+          </SidebarMenuButton>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Other</SidebarGroupLabel>
+          <SidebarMenuButton
+            className="p-5 mt-2"
+            isActive={path === "/archived"}
+          >
+            <Sparkle />
+            <span>Ai Helper</span>
+          </SidebarMenuButton>
+          <SidebarMenuButton
+            className="p-5 mt-2"
+            isActive={path === "/archived"}
+          >
+            <Settings />
+            <span>Setting</span>
+          </SidebarMenuButton>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-          <Button> + Create New Board</Button>
-          <div className="p-4 my-3 border rounded-md">
-            <h2 className="text-sm flex justify-between mb-1">4 files created <span>total 3</span></h2>
-          </div>
-          <Progress value={80} className="h-2 mt-2"/>
+        <CreateNewBoardDialog />
+        <div className="p-4 my-3 border rounded-md">
+          <h2 className="text-sm flex justify-between mb-1">
+            4 files created <span>total 3</span>
+          </h2>
+        </div>
+        <Progress value={80} className="h-2 mt-2" />
         <div className="flex items-center gap-2 p-4 border rounded-md">
-          <Image src = {user?.imageUrl ?? ''} alt="User Image" width={40} height={40}
-          className="rounded-full"/>
-          <h2>{user?.firstName} {user?.lastName}</h2>
+          <Image
+            src={user?.imageUrl ?? ""}
+            alt="User Image"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+          <h2>
+            {user?.firstName} {user?.lastName}
+          </h2>
         </div>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
